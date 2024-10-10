@@ -13,7 +13,7 @@ const Header = () => {
   const navigate = useNavigate();
   const user = useSelector((store) => store?.user);
   const dispatch = useDispatch();
-  const gptSearch = useSelector((store) => store?.toggle.toggle);
+  const gptSearch = useSelector((store) => store?.toggle?.toggle);
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -47,10 +47,10 @@ const Header = () => {
       <img className="w-32 mx-auto md:mx-0 " src={logo} alt="logo" />
       {user && (
         <div className="flex w-full justify-between md:my-0 -my-8 ">
-          <ul className="flex px-6 gap-4 my-6 text-[12px]  text-white">
+          <ul className="flex px-6 mx-2 gap-4 my-6 text-[12px]  text-white">
             <li>
               <button
-                className="md:mb-2 md:mt-0 mt-2 md:w-20 w-20 "
+                className="md:mb-2 py-0 md:py-2  md:mt-0 mt-4 md:w-20 w-20 "
                 onClick={handleGPTClicked}
               >
                 {gptSearch ? "Home" : "Search GPT"}
@@ -58,11 +58,13 @@ const Header = () => {
             </li>
           </ul>
 
-          <div className="flex  md:my-5 my-7 px-4  w-[160px] md:w-[250px] justify-between ">
-            <h3 className="text-white ">{user?.displayName?.split(" ")[0]}</h3>
+          <div className="flex  md:my-5 my-7 px-4 gap-4  md:w-[250px] justify-between ">
+            <h3 className="text-white my-2">
+              {user?.displayName?.split(" ")[0]}
+            </h3>
             {gptSearch ? (
               <select
-                className=" bg-black text-white  bg-opacity-20"
+                className=" bg-black text-white  md:-mt-2 bg-opacity-20"
                 onChange={handleLanguageChanged}
               >
                 {SUPPORTED_LANGUAGES?.map((lang) => (
@@ -76,7 +78,7 @@ const Header = () => {
                 ))}
               </select>
             ) : (
-              <div className="hidden md:block">
+              <div className="hidden md:block my-2">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   height="20"
@@ -91,7 +93,7 @@ const Header = () => {
               </div>
             )}
 
-            <div className="text-white text-sm  ">
+            <div className="text-white text-sm hidden md:block ">
               <svg
                 onClick={handleSignOut}
                 xmlns="http://www.w3.org/200/svg"

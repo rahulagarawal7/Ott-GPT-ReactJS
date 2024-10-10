@@ -6,6 +6,7 @@ const toggleSlice = createSlice({
     toggle: false,
     movieResults: null,
     movieName: null,
+    loading: false,
   },
   reducers: {
     toggleButton: (state, action) => {
@@ -16,8 +17,11 @@ const toggleSlice = createSlice({
       state.movieResults = movieResults;
       state.movieName = movieName;
     },
+    isLoading: (state, action) => {
+      state.loading = !state.loading;
+    },
   },
 });
 
-export const { toggleButton, addGPTMovies } = toggleSlice.actions;
+export const { toggleButton, addGPTMovies, isLoading } = toggleSlice.actions;
 export default toggleSlice.reducer;
