@@ -2,8 +2,7 @@ export const API_OPTIONS = {
   method: "GET",
   headers: {
     accept: "application/json",
-    Authorization:
-      "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4NWMxOGQ2OTdiMTMwOTM4MjY2NTQ1ZTVjNjlkNTM2MyIsIm5iZiI6MTcyODAzMzg5Mi43NTk3ODgsInN1YiI6IjY2ZmZiMzYxOWViZWExOTAwNmY4MDg0NCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.M8YLYj49OFVpPrlV2gtwpQn5Aa8oFHpPwlAr2HFPHgU",
+    Authorization: "Bearer " + import.meta.env.VITE_APP_TMDB_API_KEY,
   },
 };
 
@@ -29,4 +28,4 @@ export const SUPPORTED_LANGUAGES = [
   { identifier: "hindi", language: "Hindi" },
   { identifier: "spanish", language: "Spanish" },
 ];
-//export const OPENAI_KEY = process.env.REACT_APP_OPENAI_KEY;
+export const OPENAI_KEY = import.meta.env.VITE_APP_OPENAI_KEY;

@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { API_OPTIONS } from "../utils/constants";
 import { useDispatch } from "react-redux";
 import { addGPTMovies } from "../utils/toggleSlice";
-import { ChatCohere } from "@langchain/cohere";
+import { cohere } from "../utils/cohereai";
 
 const GptSearchBar = () => {
   const searchText = useRef(null);
@@ -21,28 +21,18 @@ const GptSearchBar = () => {
   };
 
   const generateText = async () => {
-    /// API call
-    const llm = new ChatCohere({
-      apiKey: "MNJk1rkyZmUVnfpEu77KPXgz4bk7XcqMXyNlGJWF",
-      model: "command-r-plus",
-      temperature: 0,
-    });
-    const aiMsg = await llm.invoke([
+    const gptSearch = await cohere.invoke([
       [
         "system",
-        "You are a helpful assistant that translates English to Hindi. Translate the user sentence.",
+        "give me 5 movie list comma separated movie list give only 5 movie list based on user inputYou are an AI movie recommender. When the user gives a query like 'funny romantic movies', provide a list of 5 relevant movie names. Return the movie names as a comma-separated list do not give 'Here is a list of five Indian romantic movies' line . If the user query is unclear, ask for clarification. ",
       ],
-      ["human", "I love programming."],
+      ["human", searchText.current.value],
     ]);
-    console.log("AI MSG ---->", aiMsg.content);
-    ////
-    const searchMoviesList = [
-      "Chupke Chupke",
-      "Gol Maal",
-      "Pati Patni Aur Woh",
-      "Angoor",
-      "Chhoti Si Baat",
-    ];
+    console.log("searchText", searchText.current.value);
+    console.log("AI MSG ---->", gptSearch.content);
+
+    const searchMoviesList = gptSearch.content.split(",");
+
     const promiseArray = searchMoviesList.map((movie) =>
       searchMovieTMDB(movie)
     );
