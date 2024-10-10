@@ -59,9 +59,7 @@ const Header = () => {
           </ul>
 
           <div className="flex  md:my-5 my-7 px-4  w-[160px] md:w-[250px] justify-between ">
-            <h3 className="text-white  md:my-2  ">
-              {user?.displayName.split(" ")[0]}
-            </h3>
+            <h3 className="text-white ">{user?.displayName?.split(" ")[0]}</h3>
             {gptSearch ? (
               <select
                 className=" bg-black text-white  bg-opacity-20"
